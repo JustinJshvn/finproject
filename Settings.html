@@ -21,6 +21,11 @@
 <a href="settings.html" class="nav-item">Settings</a>
 </nav>
 
+<main class="main">
+<header class="topbar">
+<h1>Settings</h1>
+</header>
+
 <!-- USER PROFILE -->
 
 <div class="sidebar-footer">
@@ -31,10 +36,20 @@
 </div>
 </div>
 
-<main class="main">
-<header class="topbar">
-<h1>Settings</h1>
-</header>
+<!-- NOTIFICATION PREFERENCES -->
+<section class="card">
+<h2>Notification Preferences</h2>
+<label class="toggle">Email Notifications <input type="checkbox" checked></label>
+<label class="toggle">Budget Alerts <input type="checkbox" checked></label>
+<label class="toggle">AI Insights <input type="checkbox" checked></label>
+</section>
 
-
+<!-- CURRENCY & LOCALIZATION -->
+<section class="card">
+<h2>Currency & Localization</h2>
+<div class="grid-2">
+<select><option>USD - US Dollar</option></select>
+<select><option>MM/DD/YYYY</option></select>
+</div>
+</section>
 </html>
