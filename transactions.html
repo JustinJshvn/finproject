@@ -39,20 +39,104 @@
 <input type="search" placeholder="Search transactions..." class="search" />
 </header>
 
+<!-- STATS SUMMARY -->
+<section class="stats">
+<div class="card center">
+    <p class="muted">Income</p>
+    <h3 class="positive">Rp 35.000.000</h3>
+</div>
+<div class="card center">
+    <p class="muted">Expenses</p>
+    <h3 class="negative">Rp 12.500.000</h3>
+</div>
+<div class="card center">
+    <p class="muted">Net Balance</p>
+    <h3 class="success">Rp 22.500.000</h3>
+</div>
+<div class="card center">
+    <p class="muted">Transactions</p>
+    <h3>128</h3>
+</div>
+</section>
+
 <!-- FILTERS -->
 <section class="card filters">
-<select><option>Last 7 days</option></select>
-<select><option>All Categories</option></select>
-<select><option>All Transactions</option></select>
+<select>
+    <option selected>Today</option>
+    <option>Yesterday</option>
+    <option>Last 7 days</option>
+    <option>Last 30 days</option>
+    <option>This Month</option>
+    <option>Last Month</option>
+    <option>Custom Range</option>
+</select>
+<select>
+    <option selected>All Categories</option>
+    <option>Food & Dining</option>
+    <option>Transportation</option>
+    <option>Shopping</option>
+    <option>Entertainment</option>
+    <option>Health</option>
+    <option>Utilities</option>
+    <option>Education</option>
+    <option>Travel</option>
+    <option>Salary</option>
+    <option>Investment</option>
+    <option>Other</option>
+</select>
+<select>
+    <option selected>All Transactions</option>
+    <option>Income Only</option>
+    <option>Expense Only</option>
+    <option>Recurring</option>
+    <option>One-time</option>
+</select>
 <button class="btn">Filter</button>
 <button class="btn">Export</button>
 </section>
+
+<!-- ANALYTICS -->
+<section class="analytics">
+<div class="card">
+    <h3>Spending Trend</h3>
+    <p class="muted">Your expenses increased by 12% this month</p>
+</div>
+
+<div class="card">
+    <h3>Top Category</h3>
+    <p class="muted">Food & Dining</p>
+    <p class="negative">Rp 4.250.000</p>
+</div>
+
+<div class="card">
+    <h3>Highest Expense Day</h3>
+    <p class="muted">October 5, 2025</p>
+    <p class="negative">Rp 2.100.000</p>
+</div>
+
+<div class="card">
+    <h3>AI Insight</h3>
+    <p class="muted">
+    You may reduce expenses by limiting dining out to 3× per week.
+    </p>
+</div>
+</section>
+
 
 <!-- TABLE -->
 <section class="card">
 <div class="card-header">
 <h2>Recent Transactions</h2>
 <button class="btn-primary">+ Add Transaction</button>
+</div>
+
+<!-- TABLE FOOTER -->
+<div class="card-footer">
+<p class="muted">Showing 1–10 of 128 transactions</p>
+<div class="flex gap-2">
+    <button class="btn">Prev</button>
+    <button class="btn">Next</button>
+</div>
 </div>
 
 
