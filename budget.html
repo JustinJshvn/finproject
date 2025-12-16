@@ -4,11 +4,11 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Dashboard</title>
+    <title>Budget</title>
     <link rel="stylesheet" href="styles.css" />
 </head>
 
-<body class="app">
+<body class="app budget-page">
     <!-- SIDEBAR -->
     <aside class="sidebar">
         <div class="sidebar-header">
@@ -16,8 +16,8 @@
         </div>
 
         <nav class="sidebar-nav">
-            <a href="index.html" class="nav-item active">Dashboard</a>
-            <a href="budget.html" class="nav-item">Budget</a>
+            <a href="index.html" class="nav-item">Dashboard</a>
+            <a href="budget.html" class="nav-item active">Budget</a>
             <a href="transactions.html" class="nav-item">Transactions</a>
             <a href="settings.html" class="nav-item">Settings</a>
         </nav>
@@ -33,67 +33,64 @@
 
     <!-- MAIN -->
     <main class="main">
-        <!-- TOPBAR -->
+        <!-- TOPBAR (same pattern as Dashboard) -->
         <header class="topbar topbar-grid">
             <button class="hamburger" type="button" aria-label="Open menu" onclick="toggleSidebar()">☰</button>
 
-            <h1>Dashboard</h1>
-        
+            <h1>Budget Management</h1>
+
             <div class="search search-pill">
                 <span class="search-ico">🔎</span>
                 <input type="text" placeholder="Search transactions..." />
             </div>
-        
+
             <div class="topbar-right">
                 <div class="avatar">JD</div>
             </div>
         </header>
 
-
         <div class="page">
-            <!-- STATS -->
-            <section class="stats">
-                <div class="card stat-card">
+
+            <!-- CREATE NEW BUDGET -->
+            <section class="card">
+                <div class="card-header">
                     <div>
-                        <p class="stat-title">Total Balance</p>
-                        <p class="stat-value">$12,450.00</p>
-                        <p class="stat-delta positive">+12.5% from last month</p>
+                        <h2 class="section-title" style="font-size:18px;margin:0;">Create New Budget</h2>
+                        <p class="section-sub" style="margin-top:6px;">Set spending limits for different categories</p>
                     </div>
-                    <div class="stat-icon">$</div>
+
+                    <button class="btn">＋ Add Category</button>
                 </div>
 
-                <div class="card stat-card">
-                    <div>
-                        <p class="stat-title">Income</p>
-                        <p class="stat-value">$8,500.00</p>
-                        <p class="stat-delta positive">+8.2% from last month</p>
+                <div class="budget-form">
+                    <div class="field">
+                        <label>Category Name</label>
+                        <input type="text" placeholder="e.g., Groceries" />
                     </div>
-                    <div class="stat-icon">↗</div>
-                </div>
 
-                <div class="card stat-card">
-                    <div>
-                        <p class="stat-title">Expenses</p>
-                        <p class="stat-value">$3,280.50</p>
-                        <p class="stat-delta negative">-5.4% from last month</p>
+                    <div class="field">
+                        <label>Monthly Amount</label>
+                        <input type="number" placeholder="0.00" />
                     </div>
-                    <div class="stat-icon">↘</div>
-                </div>
 
-                <div class="card stat-card">
-                    <div>
-                        <p class="stat-title">Savings</p>
-                        <p class="stat-value">$5,219.50</p>
-                        <p class="stat-delta positive">+18.3% from last month</p>
+                    <div class="field">
+                        <label>Category Icon</label>
+                        <select>
+                            <option>🍔 Food &amp; Dining</option>
+                            <option>🚗 Transportation</option>
+                            <option>🎬 Entertainment</option>
+                            <option>🛍️ Shopping</option>
+                            <option>❤️ Healthcare</option>
+                            <option>⚡ Utilities</option>
+                        </select>
                     </div>
-                    <div class="stat-icon">👛</div>
                 </div>
             </section>
 
-            <!-- BUDGET OVERVIEW -->
+            <!-- ACTIVE BUDGETS -->
             <section class="section">
-                <h2 class="section-title">Budget Overview</h2>
-                <p class="section-sub">Track your spending across categories</p>
+                <h2 class="section-title">Active Budgets</h2>
+                <p class="section-sub">Monitor your spending limits</p>
 
                 <div class="budget-grid">
                     <!-- Food -->
@@ -131,7 +128,7 @@
                         </div>
                     </div>
 
-                    <!-- Transportation -->
+                    <!-- Transport -->
                     <div class="card budget-card">
                         <div class="budget-top">
                             <div class="budget-badge">🚗</div>
@@ -166,7 +163,7 @@
                         </div>
                     </div>
 
-                    <!-- Entertainment (over) -->
+                    <!-- Entertainment over -->
                     <div class="card budget-card">
                         <div class="budget-top">
                             <div class="budget-badge">🎬</div>
@@ -201,7 +198,7 @@
                         </div>
                     </div>
 
-                    <!-- Shopping (over) -->
+                    <!-- Shopping over -->
                     <div class="card budget-card">
                         <div class="budget-top">
                             <div class="budget-badge">🛍️</div>
@@ -308,147 +305,46 @@
                 </div>
             </section>
 
-            <!-- DATA VISUALIZATION -->
+            <!-- BUDGET VS ACTUAL -->
             <section class="section">
-                <h2 class="section-title">Data Visualization</h2>
-                <p class="section-sub">Analyze your spending patterns</p>
+                <h2 class="section-title">Budget vs Actual</h2>
+                <p class="section-sub">Compare planned vs actual spending</p>
 
                 <div class="analytics">
                     <div class="card placeholder">
-                        <div class="ph-icon">◔</div>
-                        <h3 class="ph-title">Spending by Category</h3>
-                        <p class="ph-sub">Distribution of expenses across different categories</p>
+                        <div class="ph-icon">📊</div>
+                        <h3 class="ph-title">Monthly Comparison</h3>
+                        <p class="ph-sub">Budgeted vs actual spending by category</p>
                         <p class="ph-hint">Chart visualization will be displayed here</p>
                     </div>
 
                     <div class="card placeholder">
                         <div class="ph-icon">📈</div>
-                        <h3 class="ph-title">Budget Trends</h3>
-                        <p class="ph-sub">Track your budget performance over time</p>
+                        <h3 class="ph-title">Spending Trends</h3>
+                        <p class="ph-sub">Track your spending patterns over time</p>
                         <p class="ph-hint">Chart visualization will be displayed here</p>
                     </div>
                 </div>
             </section>
 
-            <!-- AI INSIGHTS -->
-            <section class="section">
-                <h2 class="section-title">AI Insights</h2>
-                <p class="section-sub">Smart recommendations based on your spending</p>
-
-                <div class="grid-2">
-                    <div class="card insight danger">
-                        <div class="i-icon">!</div>
-                        <div>
-                            <p class="i-title">Shopping Over Budget</p>
-                            <p class="i-text">Your shopping expenses are 42% higher than budgeted this month. Consider
-                                reducing non-essential purchases.</p>
-                        </div>
-                    </div>
-
-                    <div class="card insight success">
-                        <div class="i-icon">✓</div>
-                        <div>
-                            <p class="i-title">Great Progress on Food Budget</p>
-                            <p class="i-text">You've saved 24% on food expenses compared to last month. Keep up the good
-                                work!</p>
-                        </div>
-                    </div>
-
-                    <div class="card insight info">
-                        <div class="i-icon">✦</div>
-                        <div>
-                            <p class="i-title">Transportation Optimization</p>
-                            <p class="i-text">You could save $45/month by switching to monthly transit pass instead of
-                                daily tickets.</p>
-                        </div>
-                    </div>
-
-                    <div class="card insight info">
-                        <div class="i-icon">✦</div>
-                        <div>
-                            <p class="i-title">Savings Goal Milestone</p>
-                            <p class="i-text">You're 65% toward your $8,000 savings goal. You're on track to reach it in
-                                3 months.</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- RECENT TRANSACTIONS -->
+            <!-- BUDGET SUMMARY -->
             <section class="card">
-                <div class="card-header">
-                    <div>
-                        <h2 class="section-title" style="font-size:18px;margin:0;">Recent Transactions</h2>
-                        <p class="section-sub" style="margin-top:6px;">Track your spending activity</p>
-                    </div>
-                    <button class="btn">+ Add Transaction</button>
-                </div>
+                <h2 class="section-title" style="font-size:18px;margin:0;">Budget Summary</h2>
 
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th>Date</th>
-                            <th>Category</th>
-                            <th>Notes</th>
-                            <th class="right">Amount</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>2025-10-02</td>
-                            <td><span class="pill">Food &amp; Dining</span></td>
-                            <td>Lunch at cafe</td>
-                            <td class="right negative">-$45.50</td>
-                        </tr>
-                        <tr>
-                            <td>2025-10-02</td>
-                            <td><span class="pill">Transportation</span></td>
-                            <td>Uber ride</td>
-                            <td class="right negative">-$12.00</td>
-                        </tr>
-                        <tr>
-                            <td>2025-10-01</td>
-                            <td><span class="pill">Salary</span></td>
-                            <td>Monthly salary</td>
-                            <td class="right positive">+$3500.00</td>
-                        </tr>
-                        <tr>
-                            <td>2025-09-30</td>
-                            <td><span class="pill">Entertainment</span></td>
-                            <td>Movie tickets</td>
-                            <td class="right negative">-$89.99</td>
-                        </tr>
-                        <tr>
-                            <td>2025-09-29</td>
-                            <td><span class="pill">Shopping</span></td>
-                            <td>Clothing</td>
-                            <td class="right negative">-$156.75</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </section>
+                <div class="summary-grid">
+                    <div class="card summary-card">
+                        <p class="muted" style="margin:0;">Total Budgeted</p>
+                        <p class="summary-value">$1,500</p>
+                    </div>
 
-            <!-- SET YOUR BUDGET -->
-            <section class="card">
-                <h2 class="section-title" style="font-size:18px;margin:0;">Set Your Budget</h2>
-                <p class="section-sub" style="margin-top:6px;">Configure your spending limits</p>
+                    <div class="card summary-card">
+                        <p class="muted" style="margin:0;">Total Spent</p>
+                        <p class="summary-value">$1,454</p>
+                    </div>
 
-                <div class="grid-2" style="margin-top:14px;">
-                    <div>
-                        <p class="muted" style="margin:0 0 8px;">Daily Budget</p>
-                        <input type="number" placeholder="0.00" class="w-full" />
-                    </div>
-                    <div>
-                        <p class="muted" style="margin:0 0 8px;">Weekly Budget</p>
-                        <input type="number" placeholder="0.00" class="w-full" />
-                    </div>
-                    <div>
-                        <p class="muted" style="margin:0 0 8px;">Monthly Budget</p>
-                        <input type="number" placeholder="0.00" class="w-full" />
-                    </div>
-                    <div>
-                        <p class="muted" style="margin:0 0 8px;">Annual Budget</p>
-                        <input type="number" placeholder="0.00" class="w-full" />
+                    <div class="card summary-card">
+                        <p class="muted" style="margin:0;">Remaining</p>
+                        <p class="summary-value">$46</p>
                     </div>
                 </div>
             </section>

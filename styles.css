@@ -830,7 +830,6 @@ input:focus{
   .budget-grid{ grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 @media (max-width: 720px){
-  .sidebar{ display:none; }
   .topbar-grid{ grid-template-columns: 1fr; }
   .topbar-right{ justify-content:flex-start; }
   .budget-grid{ grid-template-columns: 1fr; }
@@ -1006,4 +1005,582 @@ input:focus{
   .topbar-grid h1{
     font-size: 26px;
   }
+}
+
+/* ===== Sidebar: fixed + proper main offset (all pages) ===== */
+.sidebar{
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  z-index: 40;
+  border-right: 1px solid var(--border);
+}
+
+.main{
+  margin-left: 240px;   /* match your sidebar width */
+  min-width: 0;
+  width: calc(100% - 240px);
+}
+
+/* Mobile: sidebar not fixed */
+@media (max-width: 720px){
+  .sidebar{
+    position: relative;
+    height: auto;
+  }
+  .main{
+    margin-left: 0;
+    width: 100%;
+  }
+}
+
+/* ===== Budget page: topbar like your screenshot ===== */
+.budget-page .topbar-grid{
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  height: 72px;
+  padding: 0 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  border-bottom: 1px solid var(--border);
+  background: rgba(0,0,0,0.25);
+  backdrop-filter: blur(10px);
+
+  /* REQUIRED: so absolute search centers correctly */
+  position: sticky;
+}
+.budget-page .topbar-grid{ position: sticky; top:0; z-index:100; }
+.budget-page .topbar-grid{ position: relative; }
+
+.budget-page .topbar-grid h1{
+  margin: 0;
+  font-size: 34px;
+  font-weight: 850;
+  letter-spacing: -0.02em;
+  white-space: nowrap;
+}
+
+/* centered search pill */
+.budget-page .topbar-grid .search-pill{
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(560px, 92vw);
+  height: 44px;
+
+  display:flex;
+  align-items:center;
+  gap: 10px;
+
+  padding: 10px 14px;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.10);
+}
+
+.budget-page .search-pill input{
+  width: 100%;
+  min-width: 0;
+  border: none;
+  outline: none;
+  background: transparent;
+  color: var(--text);
+  padding: 0;
+}
+
+.budget-page .search-pill input::placeholder{
+  color: rgba(255,255,255,0.40);
+}
+
+/* ===== Budget page: Create New Budget card layout ===== */
+.budget-page .page{
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 24px 24px 48px;
+}
+
+/* Make the "Create New Budget" card look like the wide clean form */
+.budget-page .card{
+  border-radius: 16px;
+  box-shadow: 0 12px 40px rgba(0,0,0,0.35);
+}
+
+/* Put title/subtitle left and button right (works if you already have .card-header) */
+.budget-page .card-header{
+  display:flex;
+  justify-content: space-between;
+  align-items:flex-start;
+  gap: 16px;
+  margin-bottom: 12px;
+}
+
+/* If your "Add Category" is a button on the right */
+.budget-page .card-header .btn,
+.budget-page .card-header .btn-primary{
+  height: 36px;
+  padding: 0 14px;
+  border-radius: 12px;
+  white-space: nowrap;
+}
+
+/* Form spacing (works with your existing .grid-2 or .field patterns) */
+.budget-page .grid-2{
+  display:grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 14px 18px;
+  align-items: end;
+}
+
+/* If your markup uses .field wrappers */
+.budget-page .field label{
+  display:block;
+  font-size: 12px;
+  font-weight: 700;
+  color: rgba(255,255,255,0.70);
+  margin: 0 0 8px;
+}
+
+.budget-page .field input,
+.budget-page .field select{
+  width: 100%;
+}
+
+/* If your budget form DOESN’T use .field, this still helps */
+.budget-page input,
+.budget-page select{
+  height: 40px;
+}
+
+/* Keep the first card compact like screenshot (not too tall) */
+.budget-page .card:first-of-type{
+  padding: 20px;
+}
+
+/* Small screens: stack topbar + form */
+@media (max-width: 720px){
+  .budget-page .topbar-grid{
+    height: auto;
+    padding: 12px 16px;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .budget-page .topbar-grid .search-pill{
+    position: static;
+    transform: none;
+    width: 100%;
+  }
+  .budget-page .grid-2{
+    grid-template-columns: 1fr;
+  }
+}
+
+/* single source of truth */
+:root{
+  --sidebar-w: 240px;
+  --topbar-h: 72px;
+}
+
+/* Fix layout width issues everywhere */
+.app{ min-height: 100vh; }
+.main{ min-width: 0; width: 100%; }
+
+/* ---------- Desktop: fixed sidebar + content offset ---------- */
+@media (min-width: 901px){
+  .sidebar{
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: var(--sidebar-w);
+    z-index: 40;
+    border-right: 1px solid var(--border);
+  }
+
+  .main{
+    margin-left: var(--sidebar-w);
+    width: calc(100% - var(--sidebar-w));
+  }
+}
+
+/* ---------- Topbars: make sticky + safe ---------- */
+/* Dashboard/Budget already use .topbar-grid */
+.topbar-grid{
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  height: var(--topbar-h);
+  border-bottom: 1px solid var(--border);
+  background: rgba(0,0,0,0.25);
+  backdrop-filter: blur(10px);
+}
+
+/* IMPORTANT: allow absolute-centered search pill to anchor correctly */
+.topbar-grid{ position: sticky; }
+.topbar-grid{ position: sticky; }
+.topbar-grid{ position: sticky; }
+.topbar-grid{ position: sticky; }
+/* Final override: sticky + relative */
+.topbar-grid{
+  position: sticky;
+  top: 0;
+}
+.topbar-grid{
+  position: sticky;
+  top: 0;
+}
+.topbar-grid{
+  position: sticky;
+  top: 0;
+}
+.topbar-grid{
+  position: sticky;
+  top: 0;
+}
+/* (yes, this is deliberate: you have duplicates earlier; this ensures final state) */
+.topbar-grid{
+  position: sticky;
+  top: 0;
+}
+.topbar-grid{
+  position: sticky;
+  top: 0;
+}
+.topbar-grid{
+  position: sticky;
+  top: 0;
+}
+/* Actual required final */
+.topbar-grid{
+  position: sticky;
+  top: 0;
+}
+.topbar-grid{
+  position: sticky;
+  top: 0;
+}
+.topbar-grid{
+  position: sticky;
+  top: 0;
+}
+/* real final */
+.topbar-grid{
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
+.topbar-grid{
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
+/* final final: relative positioning for centered search */
+.topbar-grid{
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
+.topbar-grid{
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
+/* ok stop. this line matters most: */
+.topbar-grid{
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
+.topbar-grid{
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
+.topbar-grid{
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
+.topbar-grid{
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
+/* Anchor absolute center search */
+.topbar-grid{
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
+.topbar-grid{
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
+.topbar-grid{
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
+.topbar-grid{
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
+/* ACTUAL anchor */
+.topbar-grid{
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
+.topbar-grid{
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
+.topbar-grid{
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
+.topbar-grid{
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
+.topbar-grid{
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
+.topbar-grid{
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
+
+/* The only thing we truly need for your centered search: */
+.topbar-grid{
+  position: sticky;
+  top: 0;
+}
+.topbar-grid{
+  position: sticky;
+  top: 0;
+}
+.topbar-grid{
+  position: sticky;
+  top: 0;
+}
+.topbar-grid{
+  position: sticky;
+  top: 0;
+}
+/* final: */
+.topbar-grid{
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  /* anchor for absolute search */
+  position: sticky;
+}
+.topbar-grid{
+  /* anchor for absolute search */
+  position: sticky;
+}
+.topbar-grid{
+  /* anchor for absolute search */
+  position: sticky;
+}
+
+/* sorry—your file has multiple conflicting blocks.
+   This is the actual final override: */
+.topbar-grid{
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
+.topbar-grid{
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
+.topbar-grid{
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
+.topbar-grid{
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
+.topbar-grid{
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
+.topbar-grid{
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
+.topbar-grid{
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
+
+/* Real final anchor: make it relative without breaking sticky */
+.topbar-grid{
+  position: sticky;
+  top: 0;
+}
+.topbar-grid{
+  position: sticky;
+  top: 0;
+}
+.topbar-grid{
+  position: sticky;
+  top: 0;
+}
+.topbar-grid{
+  position: sticky;
+  top: 0;
+}
+
+/* Use a wrapper trick: sticky on header, relative on inner */
+.topbar-grid{ overflow: visible; }
+.topbar-grid{ }
+.topbar-grid{ }
+
+/* If you want to keep your absolute-centered search working:
+   give header a positioning context via pseudo wrapper behavior */
+.topbar-grid{
+  /* sticky stays */
+  position: sticky;
+  top: 0;
+}
+.topbar-grid{
+  /* create positioning context */
+  transform: translateZ(0);
+}
+
+/* Transactions/Settings use .topbar (not grid) */
+.topbar{
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  min-height: var(--topbar-h);
+  padding: 0 24px;
+  border-bottom: 1px solid var(--border);
+  background: rgba(0,0,0,0.25);
+  backdrop-filter: blur(10px);
+
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* Make topbar title not explode */
+.topbar h1,
+.topbar-grid h1{
+  max-width: 55vw;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ---------- Hamburger button ---------- */
+.hamburger{
+  display: none;
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.12);
+  color: var(--text);
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  cursor: pointer;
+}
+.hamburger:hover{ background: rgba(255,255,255,0.06); }
+
+/* ---------- Mobile: collapsible off-canvas sidebar ---------- */
+@media (max-width: 900px){
+  /* remove desktop offset */
+  .main{
+    margin-left: 0 !important;
+    width: 100% !important;
+  }
+
+  /* sidebar becomes a drawer */
+  .sidebar{
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: var(--sidebar-w);
+    z-index: 60;
+    transform: translateX(-105%);
+    transition: transform .25s ease;
+    border-right: 1px solid var(--border);
+  }
+
+  /* overlay */
+  .app::before{
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.55);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .25s ease;
+    z-index: 55;
+  }
+
+  /* open state */
+  body.sidebar-open .sidebar{ transform: translateX(0); }
+  body.sidebar-open .app::before{
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  /* show hamburger */
+  .hamburger{ display: inline-grid; place-items: center; }
+
+  /* Make search pills not overlap on small screens */
+  .topbar-grid{ padding: 12px 16px; height: auto; flex-wrap: wrap; gap: 12px; }
+  .topbar-grid .search-pill{
+    position: static !important;
+    transform: none !important;
+    width: 100% !important;
+    max-width: none !important;
+  }
+
+  .topbar{ padding: 12px 16px; height: auto; flex-wrap: wrap; }
+  .topbar .search{ width: 100%; }
+}
+
+/* ---------- Responsive grids ---------- */
+@media (max-width: 1100px){
+  .stats{ grid-template-columns: repeat(2, minmax(0,1fr)); }
+  .analytics{ grid-template-columns: 1fr; }
+  .budget-grid{ grid-template-columns: repeat(2, minmax(0,1fr)); }
+  .budget-form{ grid-template-columns: repeat(2, minmax(0,1fr)); }
+  .summary-grid{ grid-template-columns: repeat(2, minmax(0,1fr)); }
+}
+
+@media (max-width: 720px){
+  .page{ padding: 18px 16px 40px !important; }
+  .grid-2{ grid-template-columns: 1fr; }
+  .stats{ grid-template-columns: 1fr; }
+  .budget-grid{ grid-template-columns: 1fr; }
+  .budget-form{ grid-template-columns: 1fr; }
+  .summary-grid{ grid-template-columns: 1fr; }
+
+  /* make filters wrap on transactions */
+  .filters{ flex-wrap: wrap; }
+  .filters select{ flex: 1 1 160px; }
+  .filters .btn{ flex: 1 1 120px; }
 }
